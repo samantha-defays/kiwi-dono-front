@@ -8,7 +8,7 @@ import { Message } from './message';
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000'; // Adresse de ton backend
+  public apiUrl = 'http://localhost:3000'; // Adresse de ton backend
   private headers: HttpHeaders = new HttpHeaders({'Content-type': 'application/json'});
 
   constructor(private http: HttpClient) { }
@@ -24,13 +24,13 @@ export class ApiService {
   }
 
   // Créer un nouveau message
-  createMessage(message: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/messages`, {text: message});
+  createMessage(message: Message): Observable<any> {
+    return this.http.post(`${this.apiUrl}/messages`, message);
   }
 
   // Mettre à jour un message par ID
-  updateMessage(id: number, messageText: string): Observable<Message> {
-    return this.http.put(`${this.apiUrl}/messages/${id}`, {text: messageText});
+  updateMessage(id: number, message: Message): Observable<Message> {
+    return this.http.put(`${this.apiUrl}/messages/${id}`, message);
   }
 
   // Supprimer un message par ID

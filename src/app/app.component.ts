@@ -9,7 +9,8 @@ import { Message } from './message';
 })
 export class AppComponent implements OnInit {
 
-  public title: string = "Les messages de Kiwi dono";
+  public title: string = "kiwi-dono-fron";
+  public pageTitle: string = "Les messages de Kiwi dono";
   public message: string = "Hello world !";
   public messages: Message[] = [];
 
@@ -22,7 +23,8 @@ export class AppComponent implements OnInit {
   }
 
   public createMessage(): void {
-    this.apiService.createMessage(this.message).subscribe((res: Message) => {
+    const message = {text: this.message};
+    this.apiService.createMessage(message).subscribe((res: Message) => {
       this.messages.push(res);
     })
   }
@@ -34,7 +36,8 @@ export class AppComponent implements OnInit {
   }
 
   public updateMessage(id: number, messageText: string): void {
-    this.apiService.updateMessage(+id, messageText).subscribe((res: Message) => {
+    const message = {id: id, text: messageText};
+    this.apiService.updateMessage(+id, message).subscribe((res: Message) => {
       console.log(res);
       
     })
